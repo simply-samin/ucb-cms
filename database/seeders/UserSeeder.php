@@ -13,7 +13,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create or update an admin user
         User::updateOrCreate(
             ['email' => 'admin@example.com'], 
             [

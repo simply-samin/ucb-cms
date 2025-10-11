@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('highlight_sections', function (Blueprint $table) {
             $table->id();
             $table->string('tagline_text')->nullable();         
-            $table->string('main_heading')->nullable();        
+            $table->string('main_heading')->nullable();    
             $table->string('background_image')->nullable();     
-            $table->string('primary_cta_text')->nullable();     
+            $table->string('primary_cta_text')->nullable();   
             $table->string('primary_cta_link')->nullable();
-            $table->string('secondary_cta_text')->nullable();   
+            $table->string('secondary_cta_text')->nullable();
             $table->string('secondary_cta_link')->nullable();
             $table->timestamps();
         });
