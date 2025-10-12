@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('cta_label')->nullable();
             $table->string('cta_link')->nullable();
             $table->string('text_alignment')->default('center');
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
