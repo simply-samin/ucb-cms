@@ -29,11 +29,12 @@ class HeroSectionForm
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(function (string $operation, $state, callable $set) {
-                        if ($operation === 'create') {
+                    ->afterStateUpdated(function ($state, callable $set, string $operation) {
+                        if ($operation === 'create' && filled($state)) {
                             $set('slug', Str::slug($state));
                         }
-                    }),
+                    })
+                    ->partiallyRenderComponentsAfterStateUpdated(['slug']),
 
                 TextInput::make('slug')
                     ->label('Slug')
