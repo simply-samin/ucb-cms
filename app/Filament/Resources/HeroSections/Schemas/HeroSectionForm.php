@@ -45,26 +45,27 @@ class HeroSectionForm
                 Select::make('layout_type')
                     ->label('Layout Type')
                     ->options([
-                        'carousel' => 'Carousel (Multiple Slides)',
-                        'static' => 'Static (Single Media)',
+                        'carousel' => 'Carousel',
+                        'static' => 'Static',
                     ])
+                    ->default('static')
+                    ->selectablePlaceholder(false)
                     ->required()
                     ->live()
                     ->afterStateUpdated(function ($state, Get $get, Set $set) {
-                            $contents = $get('contents') ?? [];
+                        $contents = $get('contents') ?? [];
 
-                            if ($state === 'static' && count($contents) > 1) {
-                                
-                                $set('layout_type', 'carousel');
+                        if ($state === 'static' && count($contents) > 1) {
+                            $set('layout_type', 'carousel');
 
-                                Notification::make()
-                                    ->warning()
-                                    ->title('Cannot switch to Static layout')
-                                    ->body('To switch to Static, only one hero content is allowed. Please remove extra contents before changing the layout type.')
-                                    ->persistent()
-                                    ->send();
-                            }
-                        }),
+                            Notification::make()
+                                ->warning()
+                                ->title('Cannot switch to Static layout')
+                                ->body('To switch to Static, only one hero content is allowed. Please remove extra contents before changing the layout type.')
+                                ->persistent()
+                                ->send();
+                        }
+                    }),
 
                 Toggle::make('is_active')
                     ->label('Active')
@@ -94,7 +95,7 @@ class HeroSectionForm
 
                         return $data;
                     })
-                    ->orderColumn('order')
+                    ->orderColumn()
                     ->required()
                     ->minItems(1)
                     ->maxItems(fn (Get $get) => $get('layout_type') === 'static' ? 1 : null)

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('subtitle')->nullable();
             $table->string('cta_label')->nullable();
             $table->string('cta_link')->nullable();
-            $table->integer('order')->default(0);
+            $table->integer('sort')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

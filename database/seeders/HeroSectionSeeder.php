@@ -26,7 +26,7 @@ class HeroSectionSeeder extends Seeder
                     'subtitle' => 'Text will show here',
                     'cta_label' => 'Learn More',
                     'cta_link' => '#',
-                    'order' => 1,
+                    'sort' => 1,
                     'is_active' => true,
                 ],
                 [
@@ -36,7 +36,7 @@ class HeroSectionSeeder extends Seeder
                     'subtitle' => 'Experience premium financial solutions with UCB.',
                     'cta_label' => 'Explore Cards',
                     'cta_link' => '#cards',
-                    'order' => 2,
+                    'sort' => 2,
                     'is_active' => true,
                 ],
                 [
@@ -46,7 +46,7 @@ class HeroSectionSeeder extends Seeder
                     'subtitle' => 'Enjoy exclusive offers and rewards every day.',
                     'cta_label' => 'Get Started',
                     'cta_link' => '#apply',
-                    'order' => 3,
+                    'sort' => 3,
                     'is_active' => true,
                 ],
             ];
@@ -69,7 +69,7 @@ class HeroSectionSeeder extends Seeder
                 'subtitle' => 'Driven by innovation and customer trust since 1990.',
                 'cta_label' => 'Read More',
                 'cta_link' => '/about',
-                'order' => 0,
+                'sort' => 0,
                 'is_active' => true,
             ]);
         }
