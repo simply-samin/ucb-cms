@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             NavigationBarSeeder::class,
             FooterSeeder::class,
             HeroSectionSeeder::class,
-            HighlightSectionSeeder::class,
         ]);
     }
 }

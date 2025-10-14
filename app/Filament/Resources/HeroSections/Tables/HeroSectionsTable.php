@@ -2,11 +2,9 @@
 
 namespace App\Filament\Resources\HeroSections\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\CreateAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables;
+use Filament\Tables\Columns;
 use Filament\Tables\Table;
 
 class HeroSectionsTable
@@ -15,47 +13,51 @@ class HeroSectionsTable
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('background_media')
-                    ->label('Background')
-                    ->disk('public')
-                    ->square(),
+                Columns\TextColumn::make('name')
+                    ->label('Name')
+                    ->searchable()
+                    ->sortable(),
 
-                Tables\Columns\TextColumn::make('title')
-                    ->sortable()
-                    ->searchable(),
+                Columns\TextColumn::make('slug')
+                    ->label('Slug')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('subtitle')
-                    ->limit(40)
-                    ->wrap(),
-
-                Tables\Columns\TextColumn::make('background_type')
-                    ->label('Type')
+                Columns\TextColumn::make('layout_type')
+                    ->label('Layout Type')
                     ->badge()
-                    ->colors([
-                        'primary' => 'image',
-                        'warning' => 'video',
-                    ]),
+                    ->color(fn (string $state): string => match ($state) {
+                        'carousel' => 'info',
+                        'static' => 'success',
+                        default => 'gray',
+                    })
+                    ->sortable(),
 
-                Tables\Columns\TextColumn::make('order')
-                    ->sortable()
-                    ->label('Order')
-                    ->alignCenter(),
+                Columns\IconColumn::make('is_active')
+                    ->label('Active')
+                    ->boolean(),
 
-                Tables\Columns\TextColumn::make('updated_at')
+                Columns\TextColumn::make('updated_at')
                     ->label('Last Updated')
-                    ->since(),
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->defaultSort('order')
-            ->filters([])
-            ->recordUrl(null)
+            ->filters([
+                Tables\Filters\SelectFilter::make('layout_type')
+                    ->label('Layout Type')
+                    ->options([
+                        'carousel' => 'Carousel',
+                        'static' => 'Static',
+                    ]),
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label('Active'),
+
+            ])
+            ->defaultSort('name')
+            ->striped()
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                CreateAction::make(),
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

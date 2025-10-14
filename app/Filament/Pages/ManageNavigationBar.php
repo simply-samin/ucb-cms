@@ -22,11 +22,11 @@ use UnitEnum;
  */
 class ManageNavigationBar extends Page
 {
-    // Modern navigation metadata for Filament 4
+
     protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedBars3;
     protected static ?string $navigationLabel = 'Navigation Bar';
     protected static string | UnitEnum | null $navigationGroup = 'Site Structure';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 1;
 
     protected string $view = 'filament.pages.manage-navigation-bar';
 

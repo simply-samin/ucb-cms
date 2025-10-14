@@ -21,5 +21,6 @@ class Footer extends Model
     protected $casts = [
         'links' => 'array',
         'social_links' => 'array',
+        'mobile_apps' => 'array',
     ];
 }
