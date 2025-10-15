@@ -29,7 +29,7 @@ class HeroSectionForm
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(function ($state, callable $set, string $operation) {
+                    ->afterStateUpdated(function ($state, Set $set, string $operation) {
                         if ($operation === 'create' && filled($state)) {
                             $set('slug', Str::slug($state));
                         }

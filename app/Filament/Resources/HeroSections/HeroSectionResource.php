@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\HeroSections;
 
+use BackedEnum;
 use App\Filament\Resources\HeroSections\Pages\CreateHeroSection;
 use App\Filament\Resources\HeroSections\Pages\EditHeroSection;
 use App\Filament\Resources\HeroSections\Pages\ListHeroSections;
-use App\Filament\Resources\HeroSections\RelationManagers\ContentsRelationManager;
 use App\Filament\Resources\HeroSections\Schemas\HeroSectionForm;
 use App\Filament\Resources\HeroSections\Tables\HeroSectionsTable;
 use App\Models\HeroSection;
@@ -18,7 +18,7 @@ class HeroSectionResource extends Resource
 {
     protected static ?string $model = HeroSection::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::OutlinedPhoto;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedPhoto;
 
     public static function form(Schema $schema): Schema
     {
