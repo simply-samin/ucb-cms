@@ -72,6 +72,7 @@ class OffersRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->inverseRelationship('category')
             ->recordTitleAttribute('title')
             ->columns([
                 ImageColumn::make('brand_image')
