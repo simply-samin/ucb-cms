@@ -2,7 +2,6 @@
 
 namespace App\Filament\Pages;
 
-use App\Enums\NavigationGroup;
 use App\Models\NavigationBar;
 use BackedEnum;
 use Filament\Actions\Action;
@@ -24,11 +23,11 @@ use UnitEnum;
 class ManageNavigationBar extends Page
 {
 
-    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedBars3;
+    protected static string | BackedEnum | null $navigationIcon = null;
 
     protected static ?string $navigationLabel = 'Navigation Bar';
 
-    protected static string | UnitEnum | null $navigationGroup = NavigationGroup::SiteStructure;
+    protected static string | UnitEnum | null $navigationGroup = 'Layout';
     
     protected static ?int $navigationSort = 1;
 

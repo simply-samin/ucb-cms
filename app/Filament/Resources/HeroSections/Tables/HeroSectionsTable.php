@@ -4,7 +4,8 @@ namespace App\Filament\Resources\HeroSections\Tables;
 
 use Filament\Actions\EditAction;
 use Filament\Tables;
-use Filament\Tables\Columns;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class HeroSectionsTable
@@ -13,35 +14,35 @@ class HeroSectionsTable
     {
         return $table
             ->columns([
-                Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Name')
                     ->searchable()
                     ->sortable(),
 
-                Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->label('Slug')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Columns\TextColumn::make('layout_type')
-                    ->label('Layout Type')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'carousel' => 'info',
-                        'static' => 'success',
-                        default => 'gray',
-                    })
-                    ->sortable(),
+                TextColumn::make('layout_type')
+                        ->label('Layout Type')
+                        ->badge()
+                        ->color(fn (string $state): string => match ($state) {
+                            'carousel' => 'info',
+                            'static' => 'success',
+                            default => 'gray',
+                        })
+                        ->sortable(),
 
-                Columns\IconColumn::make('is_active')
-                    ->label('Active')
-                    ->boolean(),
+                IconColumn::make('is_active')
+                        ->label('Active')
+                        ->boolean(),
 
-                Columns\TextColumn::make('updated_at')
-                    ->label('Last Updated')
-                    ->since()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                        ->label('Last Updated')
+                        ->since()
+                        ->sortable()
+                        ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('layout_type')

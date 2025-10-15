@@ -13,12 +13,19 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class HeroSectionResource extends Resource
 {
     protected static ?string $model = HeroSection::class;
 
     protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedPhoto;
+
+    protected static ?string $navigationLabel = 'Hero Sections';
+
+    protected static string | UnitEnum | null $navigationGroup = 'Sections';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

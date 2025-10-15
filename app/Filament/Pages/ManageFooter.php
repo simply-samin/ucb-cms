@@ -2,7 +2,6 @@
 
 namespace App\Filament\Pages;
 
-use App\Enums\NavigationGroup;
 use App\Models\Footer;
 use BackedEnum;
 use Filament\Actions\Action;
@@ -25,11 +24,11 @@ use UnitEnum;
  */
 class ManageFooter extends Page
 {
-    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedBars4;
+    protected static string | BackedEnum | null $navigationIcon = null;
 
     protected static ?string $navigationLabel = 'Footer';
 
-    protected static string | UnitEnum | null $navigationGroup = NavigationGroup::SiteStructure;
+    protected static string | UnitEnum | null $navigationGroup = 'Layout';
     
     protected static ?int $navigationSort = 2;
 
