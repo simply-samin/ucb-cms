@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             FooterSeeder::class,
             HeroSectionSeeder::class,
             ExploreCardSectionSeeder::class,
+            OfferSeeder::class,
         ]);
     }
 }
