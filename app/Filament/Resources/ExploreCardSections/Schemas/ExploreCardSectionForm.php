@@ -5,11 +5,11 @@ namespace App\Filament\Resources\ExploreCardSections\Schemas;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 class ExploreCardSectionForm
@@ -29,23 +29,12 @@ class ExploreCardSectionForm
                     ->maxLength(255)
                     ->required(),
 
-                Repeater::make('title_dynamic')
+                TagsInput::make('title_dynamic')
                     ->label('Rotating Phrases')
+                    ->placeholder('e.g. "exciting adventures", "lasting memories"')
                     ->helperText('These phrases will rotate dynamically after the title.')
-                    ->schema([
-                        TextInput::make('value')
-                            ->label('Phrase')
-                            ->placeholder('e.g. exciting adventures')
-                            ->required()
-                            ->maxLength(255),
-                    ])
-                    ->addActionLabel('Add Phrase')
-                    ->minItems(1)
                     ->reorderable()
                     ->required()
-                    ->deleteAction(fn (Action $action, Get $get) =>
-                        $action->visible(fn () => count($get('title_dynamic') ?? []) > 1)
-                    )
                     ->columnSpanFull(),
 
                 TextInput::make('subtitle')
@@ -55,7 +44,7 @@ class ExploreCardSectionForm
 
                 FileUpload::make('media_path')
                     ->label('Image')
-                    ->helperText('Upload image (max 2MB).')
+                    ->helperText('Upload an image (Max: 2MB).')
                     ->disk('public')
                     ->directory('explore')
                     ->visibility('public')

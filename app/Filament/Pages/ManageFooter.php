@@ -50,8 +50,8 @@ class ManageFooter extends Page
                         ->label('Footer Logo')
                         ->directory('footers')
                         ->image()
-                        ->maxSize(2048)
-                        ->helperText('Upload the footer logo (max 2MB).'),
+                        ->maxSize(1024)
+                        ->helperText('Upload the footer logo (Max: 1MB).'),
 
                     RichEditor::make('description')
                         ->label('Footer Description')

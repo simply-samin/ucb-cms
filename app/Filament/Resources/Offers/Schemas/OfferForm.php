@@ -20,6 +20,8 @@ class OfferForm
                 Select::make('offer_category_id')
                     ->label('Offer Category')
                     ->relationship('category', 'title')
+                    ->searchable()
+                    ->preload()
                     ->required(),
 
                 TextInput::make('brand_name')
@@ -35,7 +37,7 @@ class OfferForm
                     ->image()
                     ->imagePreviewHeight('100px')
                     ->maxSize(1024)
-                    ->helperText('Upload the brand image (max 1MB).')
+                    ->helperText('Upload the brand image (Max: 1MB).')
                     ->columnSpanFull(),
 
                 TextInput::make('super_title')

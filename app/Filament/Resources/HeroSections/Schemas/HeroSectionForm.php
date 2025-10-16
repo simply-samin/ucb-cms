@@ -125,13 +125,13 @@ class HeroSectionForm
                             ->schema([
                                 FileUpload::make('upload_path')
                                     ->label('Image')
-                                    ->helperText('Upload the hero background image (max 5MB).')
+                                    ->helperText('Upload the hero background image (Max: 2MB).')
                                     ->disk('public')
                                     ->directory('hero')
                                     ->visibility('public')
                                     ->image()
                                     ->imagePreviewHeight('100px')
-                                    ->maxSize(5120)
+                                    ->maxSize(2048)
                                     ->required(fn (Get $get) => $get('media_type') === 'image')
                                     ->visible(fn (Get $get) => $get('media_type') === 'image'),
 

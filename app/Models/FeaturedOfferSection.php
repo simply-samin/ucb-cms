@@ -10,16 +10,6 @@ class FeaturedOfferSection extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(OfferCategory::class, 'featured_offer_section_category')
-            ->withPivot([
-                'media_type', 
-                'media_image',
-                'super_title',
-                'title',
-                'subtitle' ,
-                'sort'
-            ])
-            ->withTimestamps()
-            ->orderByPivot('sort');
+        return $this->hasMany(FeaturedOfferSectionCategory::class, 'featured_offer_section_id');
     }
 }

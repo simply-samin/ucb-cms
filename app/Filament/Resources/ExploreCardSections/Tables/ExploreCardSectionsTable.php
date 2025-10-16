@@ -25,7 +25,6 @@ class ExploreCardSectionsTable
 
                 TextColumn::make('title_dynamic')
                     ->label('Rotating Phrases')
-                    ->formatStateUsing(fn ($state) => is_array($state) ? implode(', ', $state) : '-')
                     ->limit(50)
                     ->toggleable(isToggledHiddenByDefault: true),
 

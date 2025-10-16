@@ -22,11 +22,8 @@ class OfferCategory extends Model
         return $this->hasMany(Offer::class);
     }
 
-    public function featuredOfferSections()
+    public function featuredSectionCategories()
     {
-        return $this->belongsToMany(FeaturedOfferSection::class, 'featured_offer_section_category')
-            ->withPivot(['media_type', 'media_image', 'sort'])
-            ->withTimestamps()
-            ->orderByPivot('sort');
+        return $this->hasMany(FeaturedOfferSectionCategory::class, 'offer_category_id');
     }
 }

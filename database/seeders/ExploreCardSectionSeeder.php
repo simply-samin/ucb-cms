@@ -22,9 +22,9 @@ class ExploreCardSectionSeeder extends Seeder
                     'super_title' => 'Adventure Awaits',
                     'title_static' => 'Explore the Mountains',
                     'title_dynamic' => [
-                        ['value' => 'unforgettable moments'],
-                        ['value' => 'breathtaking views'],
-                        ['value' => 'adventures that matter'],
+                        'unforgettable moments',
+                        'breathtaking views',
+                        'adventures that matter',
                     ],
                     'subtitle' => 'Discover nature’s finest peaks and scenery.',
 
@@ -46,9 +46,9 @@ class ExploreCardSectionSeeder extends Seeder
                     'super_title' => 'The Calm Beyond',
                     'title_static' => 'Escape to the Sea',
                     'title_dynamic' => [
-                        ['value' => 'lasting memories'],
-                        ['value' => 'peace & sunshine'],
-                        ['value' => 'relaxation and joy'],
+                        'lasting memories',
+                        'peace & sunshine',
+                        'relaxation and joy',
                     ],
                     'subtitle' => 'Experience the serenity of the open ocean.',
 
