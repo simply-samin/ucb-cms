@@ -121,26 +121,31 @@ class HeroSectionForm
                                     ->inline(false),
                             ]),
 
-                            Grid::make(2)
-                                ->schema([
-                                    FileUpload::make('upload_path')
-                                        ->label('Image')
-                                        ->helperText('Upload the hero background image (max 5MB).')
-                                        ->disk('public')
-                                        ->directory('hero')
-                                        ->visibility('public')
-                                        ->image()
-                                        ->imagePreviewHeight('100px')
-                                        ->maxSize(5120)
-                                        ->required(fn (Get $get) => $get('media_type') === 'image')
-                                        ->visible(fn (Get $get) => $get('media_type') === 'image'),
+                        Grid::make(2)
+                            ->schema([
+                                FileUpload::make('upload_path')
+                                    ->label('Image')
+                                    ->helperText('Upload the hero background image (max 5MB).')
+                                    ->disk('public')
+                                    ->directory('hero')
+                                    ->visibility('public')
+                                    ->image()
+                                    ->imagePreviewHeight('100px')
+                                    ->maxSize(5120)
+                                    ->required(fn (Get $get) => $get('media_type') === 'image')
+                                    ->visible(fn (Get $get) => $get('media_type') === 'image'),
 
-                                    TextInput::make('video_url')
-                                        ->label('Video URL')
-                                        ->placeholder('https://example.com/video.mp4')
-                                        ->required(fn (Get $get) => $get('media_type') === 'video')
-                                        ->visible(fn (Get $get) => $get('media_type') === 'video'),
-                                ]),
+                                TextInput::make('video_url')
+                                    ->label('Video URL')
+                                    ->placeholder('https://example.com/video.mp4')
+                                    ->required(fn (Get $get) => $get('media_type') === 'video')
+                                    ->visible(fn (Get $get) => $get('media_type') === 'video'),
+                            ]),
+
+
+                        TextInput::make('super_title')
+                            ->label('Super Title')
+                            ->maxLength(255),
 
                         TextInput::make('title')
                             ->label('Title')
@@ -149,7 +154,6 @@ class HeroSectionForm
                         Textarea::make('subtitle')
                             ->label('Subtitle')
                             ->maxLength(500),
-
 
                         Grid::make(2)
                             ->schema([
@@ -164,6 +168,8 @@ class HeroSectionForm
                     ])
                     ->columns(1)
                     ->columnSpanFull(),
+
+
             ]);
     }
 }

@@ -13,8 +13,11 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -39,33 +42,61 @@ class OffersRelationManager extends RelationManager
                     ->visibility('public')
                     ->image()
                     ->imagePreviewHeight('100px')
-                    ->maxSize(2048)
+                    ->maxSize(1024)
+                    ->helperText('Upload the brand image (max 1MB).')
                     ->columnSpanFull(),
 
-                TextInput::make('offer_amount')
-                    ->label('Offer Amount')
-                    ->maxLength(255),
+                TextInput::make('super_title')
+                    ->label('Super Title')
+                    ->maxLength(255)
+                    ->columnSpanFull(),
 
                 TextInput::make('title')
                     ->label('Title')
                     ->maxLength(255)
                     ->required(),
 
-                Textarea::make('subtitle')
+                TextInput::make('subtitle')
                     ->label('Subtitle')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpanFull(),
+
+                Grid::make(2)
+                    ->schema([
+                        TextInput::make('offer_amount')
+                            ->label('Offer Amount')
+                            ->maxLength(255),
+
+                        TextInput::make('minimum_order')
+                            ->label('Minimum Order')
+                            ->maxLength(255),
+                    ])
+                    ->columnSpanFull(),
+
+                TextInput::make('cash_back_limit')
+                    ->label('Cashback Limit')
+                    ->maxLength(255)
+                    ->columnSpanFull(),
 
                 Textarea::make('description')
                     ->label('Description')
-                    ->rows(3),
+                    ->rows(3)
+                    ->columnSpanFull(),
 
                 Textarea::make('eligibility')
                     ->label('Eligibility')
-                    ->rows(2),
+                    ->rows(2)
+                    ->columnSpanFull(),
 
                 TextInput::make('validity')
                     ->label('Validity')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpanFull(),
+
+                Toggle::make('is_active')
+                    ->label('Active')
+                    ->default(true)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -84,22 +115,39 @@ class OffersRelationManager extends RelationManager
                     ->label('Brand Name')
                     ->sortable(),
 
-                TextColumn::make('offer_amount')
-                    ->label('Amount')
-                    ->sortable(),
+                TextColumn::make('super_title')
+                    ->label('Super Title')
+                    ->limit(40)
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('title')
                     ->label('Title')
                     ->limit(40)
                     ->searchable(),
 
+                TextColumn::make('offer_amount')
+                    ->label('Offer Amount')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('minimum_order')
+                    ->label('Minimum Order')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('cash_back_limit')
+                    ->label('Cashback Limit')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('validity')
                     ->label('Validity')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
+
+                IconColumn::make('is_active')
+                    ->label('Active')
+                    ->boolean(),
             ])
             ->defaultSort('brand_name')
             ->headerActions([

@@ -10,7 +10,6 @@ class HeroSectionSeeder extends Seeder
     public function run(): void
     {
         if (HeroSection::count() === 0) {
-
             $carouselHero = HeroSection::create([
                 'name' => 'Homepage Carousel',
                 'slug' => 'homepage-carousel',
@@ -22,6 +21,7 @@ class HeroSectionSeeder extends Seeder
                 [
                     'media_type' => 'image',
                     'media_path' => 'hero/slide1.jpg',
+                    'super_title' => 'Welcome to UCB',
                     'title' => 'Your Campaign',
                     'subtitle' => 'Text will show here',
                     'cta_label' => 'Learn More',
@@ -32,6 +32,7 @@ class HeroSectionSeeder extends Seeder
                 [
                     'media_type' => 'image',
                     'media_path' => 'hero/slide2.jpg',
+                    'super_title' => 'Smart Banking',
                     'title' => 'Banking Beyond the Ordinary',
                     'subtitle' => 'Experience premium financial solutions with UCB.',
                     'cta_label' => 'Explore Cards',
@@ -42,6 +43,7 @@ class HeroSectionSeeder extends Seeder
                 [
                     'media_type' => 'image',
                     'media_path' => 'hero/slide3.jpg',
+                    'super_title' => 'Rewards for You',
                     'title' => 'A Gateway to Lasting Memories',
                     'subtitle' => 'Enjoy exclusive offers and rewards every day.',
                     'cta_label' => 'Get Started',
@@ -65,6 +67,7 @@ class HeroSectionSeeder extends Seeder
             $staticHero->contents()->create([
                 'media_type' => 'image',
                 'media_path' => 'hero/about-banner.jpg',
+                'super_title' => 'Our Story',
                 'title' => 'About Our Mission',
                 'subtitle' => 'Driven by innovation and customer trust since 1990.',
                 'cta_label' => 'Read More',

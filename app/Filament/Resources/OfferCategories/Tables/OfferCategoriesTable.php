@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\OfferCategories\Tables;
 
 use Filament\Actions\EditAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -13,6 +13,12 @@ class OfferCategoriesTable
     {
         return $table
             ->columns([
+                TextColumn::make('super_title')
+                    ->label('Super Title')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('title')
                     ->label('Title')
                     ->searchable()
@@ -27,6 +33,10 @@ class OfferCategoriesTable
                     ->label('Offers')
                     ->counts('offers')
                     ->badge(),
+
+                IconColumn::make('is_active')
+                    ->label('Active')
+                    ->boolean(),
 
                 TextColumn::make('updated_at')
                     ->label('Last Updated')

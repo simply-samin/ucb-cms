@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('featured_offer_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('title_static')->nullable();
-            $table->json('title_dynamic')->nullable();
+            $table->string('title_prefix')->nullable();
+            $table->string('title_accent')->nullable();
             $table->timestamps();
         });
     }

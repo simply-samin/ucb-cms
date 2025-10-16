@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Offers\Tables;
 
 use Filament\Actions\EditAction;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -28,9 +29,9 @@ class OffersTable
                     ->label('Category')
                     ->sortable(),
 
-                TextColumn::make('offer_amount')
-                    ->label('Offer Amount')
-                    ->sortable()
+                TextColumn::make('super_title')
+                    ->label('Super Title')
+                    ->limit(40)
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('title')
@@ -39,10 +40,29 @@ class OffersTable
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('offer_amount')
+                    ->label('Offer Amount')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('minimum_order')
+                    ->label('Minimum Order')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('cash_back_limit')
+                    ->label('Cashback Limit')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('validity')
                     ->label('Validity')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
+                IconColumn::make('is_active')
+                    ->label('Active')
+                    ->boolean(),
 
                 TextColumn::make('updated_at')
                     ->label('Last Updated')
@@ -50,13 +70,16 @@ class OffersTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+
             ->filters([
                 Tables\Filters\SelectFilter::make('offer_category_id')
                     ->label('Category')
                     ->relationship('category', 'title'),
             ])
+
             ->defaultSort('brand_name')
             ->striped()
+
             ->recordActions([
                 EditAction::make(),
             ]);

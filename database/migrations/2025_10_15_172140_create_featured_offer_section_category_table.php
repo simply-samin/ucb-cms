@@ -19,8 +19,13 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
+            $table->string('super_title')->nullable();
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+
             $table->string('media_type')->nullable();
             $table->string('media_image')->nullable();
+
             $table->integer('sort')->nullable();
 
             $table->timestamps();

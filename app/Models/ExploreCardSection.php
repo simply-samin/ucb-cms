@@ -19,7 +19,7 @@ class ExploreCardSection extends Model
 
     protected $casts = [
         'keywords' => 'array',
-        'subtitle_dynamic' => 'array',
+        'title_dynamic' => 'array',
         'spin_clockwise' => 'boolean',
         'scale' => 'float',
         'spin_speed' => 'float',

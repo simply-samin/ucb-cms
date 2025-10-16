@@ -10,17 +10,26 @@ return new class extends Migration
     {
         Schema::create('explore_card_sections', function (Blueprint $table) {
             $table->id();
+
             $table->string('media_path')->nullable();
             $table->string('media_type')->nullable();
+
             $table->float('scale')->default(1.0);
             $table->boolean('spin_clockwise')->default(true);
             $table->float('spin_speed')->default(1.0);
-            $table->string('title');
-            $table->string('subtitle_static')->nullable();
-            $table->json('subtitle_dynamic')->nullable();
+
+            $table->string('super_title')->nullable();
+
+            $table->string('title_static')->nullable();
+            $table->json('title_dynamic')->nullable();
+
+            $table->string('subtitle')->nullable();
+
             $table->json('keywords')->nullable();
+
             $table->string('cta_primary_label')->nullable();
             $table->string('cta_primary_link')->nullable();
+
             $table->string('cta_secondary_label')->nullable();
             $table->string('cta_secondary_link')->nullable();
 
