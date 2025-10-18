@@ -37,12 +37,6 @@ class ExploreCardSectionResource extends Resource
         return ExploreCardSectionsTable::configure($table);
     }
 
-    public static function mutateFormDataBeforeSave(array $data): array
-    {
-        $data['media_type'] = 'image';
-        return $data;
-    }
-
     public static function getRelations(): array
     {
         return [];

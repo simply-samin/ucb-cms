@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\ExploreCardSections\Pages;
+namespace App\Filament\Resources\Emis\Pages;
 
-use App\Filament\Resources\ExploreCardSections\ExploreCardSectionResource;
+use App\Filament\Resources\Emis\EmiResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditExploreCardSection extends EditRecord
+class EditEmi extends EditRecord
 {
-    protected static string $resource = ExploreCardSectionResource::class;
+    protected static string $resource = EmiResource::class;
 
     protected function getHeaderActions(): array
     {

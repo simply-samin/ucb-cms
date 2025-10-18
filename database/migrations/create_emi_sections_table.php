@@ -6,26 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('offer_categories', function (Blueprint $table) {
+        Schema::create('emi_sections', function (Blueprint $table) {
             $table->id();
-
-            $table->string('media_type')->nullable(); 
-            $table->string('media_path')->nullable();
-
             $table->string('super_title')->nullable();
-            $table->string('title');
-            $table->string('subtitle')->nullable();
-
+            $table->string('title_static')->nullable();
+            $table->json('title_dynamic')->nullable();
             $table->boolean('is_active')->default(true);
-
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('offer_categories');
+        Schema::dropIfExists('emi_sections');
     }
 };

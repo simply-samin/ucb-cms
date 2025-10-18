@@ -4,12 +4,14 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\FeaturedOfferSection;
+use App\Models\FeaturedOfferSectionCategory;
 use App\Models\OfferCategory;
 
 class FeaturedOfferSectionSeeder extends Seeder
 {
     public function run(): void
     {
+        // Don’t reseed if it already exists
         if (FeaturedOfferSection::count() > 0) {
             return;
         }
@@ -26,16 +28,16 @@ class FeaturedOfferSectionSeeder extends Seeder
                 'title'          => 'Where the World is Your Oyster',
                 'subtitle'       => null,
                 'media_type'     => 'image',
-                'media_image'    => null,
+                'media_image'    => 'https://ucbcdn.example.com/media/featured-dining.jpg',
                 'sort'           => 1,
             ],
             [
                 'category_title' => 'Groceries',
-                'super_title'    => 'Enjoy Daily Perks at Your Favorite Cafés',
-                'title'          => 'Moments are Brewed to Perfection',
+                'super_title'    => 'Save More on Everyday Essentials',
+                'title'          => 'Smart Shopping Starts Here',
                 'subtitle'       => null,
                 'media_type'     => 'image',
-                'media_image'    => null,
+                'media_image'    => 'https://ucbcdn.example.com/media/featured-groceries.jpg',
                 'sort'           => 2,
             ],
             [
@@ -44,16 +46,16 @@ class FeaturedOfferSectionSeeder extends Seeder
                 'title'          => 'Style is a State of Mind',
                 'subtitle'       => null,
                 'media_type'     => 'image',
-                'media_image'    => null,
+                'media_image'    => 'https://ucbcdn.example.com/media/featured-fashion.jpg',
                 'sort'           => 3,
             ],
             [
                 'category_title' => 'Others',
-                'super_title'    => 'Enjoy Daily Perks at Your Favorite Shops',
-                'title'          => 'Every Swipe Transports You to Wider Aisles',
+                'super_title'    => 'Unlock More Everyday Rewards',
+                'title'          => 'Every Swipe Brings New Adventures',
                 'subtitle'       => null,
                 'media_type'     => 'image',
-                'media_image'    => null,
+                'media_image'    => 'https://ucbcdn.example.com/media/featured-others.jpg',
                 'sort'           => 4,
             ],
         ];
@@ -65,15 +67,15 @@ class FeaturedOfferSectionSeeder extends Seeder
                 continue;
             }
 
-            $section->categories()->attach($category->id, [
-                'super_title' => $grid['super_title'],
-                'title'       => $grid['title'],
-                'subtitle'    => $grid['subtitle'],
-                'media_type'  => $grid['media_type'],
-                'media_image' => $grid['media_image'],
-                'sort'        => $grid['sort'],
-                'created_at'  => now(),
-                'updated_at'  => now(),
+            FeaturedOfferSectionCategory::create([
+                'featured_offer_section_id' => $section->id,
+                'offer_category_id'          => $category->id,
+                'super_title'                => $grid['super_title'],
+                'title'                      => $grid['title'],
+                'subtitle'                   => $grid['subtitle'],
+                'media_type'                 => $grid['media_type'],
+                'media_image'                => $grid['media_image'],
+                'sort'                       => $grid['sort'],
             ]);
         }
     }

@@ -4,10 +4,11 @@ namespace App\Filament\Resources\LoungeSections\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
-use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Schema;
 
 class LoungeSectionForm
 {
@@ -17,29 +18,33 @@ class LoungeSectionForm
             ->columns(2)
             ->schema([
 
-                Grid::make(2)
-                    ->schema([
-                        Select::make('media_type')
-                            ->label('Media Type')
-                            ->options([
-                                'image' => 'Image',
-                                'video' => 'Video',
-                            ])
-                            ->default('image')
-                            ->required()
-                            ->live(),
-
-                        FileUpload::make('media_path')
-                            ->label('Media File')
-                            ->helperText('Upload an image or video for the Lounge section (Max 2MB).')
-                            ->disk('public')
-                            ->directory('lounge')
-                            ->visibility('public')
-                            ->imagePreviewHeight('100px')
-                            ->maxSize(2048)
-                            ->required()
-                            ->columnSpanFull(),
+                Select::make('media_type')
+                    ->label('Media Type')
+                    ->options([
+                        'image' => 'Image',
+                        'video' => 'Video',
                     ])
+                    ->required()
+                    ->live(),
+
+                FileUpload::make('upload_path')
+                    ->label('Image')
+                    ->helperText('Upload the hero background image (Max: 1MB).')
+                    ->disk('public')
+                    ->directory('lounge')
+                    ->visibility('public')
+                    ->image()
+                    ->imagePreviewHeight('100px')
+                    ->maxSize(1024)
+                    ->required(fn (Get $get) => $get('media_type') === 'image')
+                    ->visible(fn (Get $get) => $get('media_type') === 'image')
+                    ->columnSpanFull(),
+
+                TextInput::make('video_url')
+                    ->label('Video URL')
+                    ->placeholder('https://example.com/video.mp4')
+                    ->required(fn (Get $get) => $get('media_type') === 'video')
+                    ->visible(fn (Get $get) => $get('media_type') === 'video')
                     ->columnSpanFull(),
 
                 TextInput::make('super_title')

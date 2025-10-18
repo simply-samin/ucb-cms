@@ -6,14 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('offers', function (Blueprint $table) {
+        Schema::create('emis', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('offer_category_id')
-                ->constrained()
-                ->cascadeOnDelete();
+            $table->foreignId('emi_category_id')
+                ->nullable()
+                ->constrained('emi_categories')
+                ->nullOnDelete();
 
             $table->string('media_type')->nullable();
             $table->string('media_path')->nullable();
@@ -33,8 +37,11 @@ return new class extends Migration
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('emis');
     }
 };

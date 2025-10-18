@@ -16,4 +16,11 @@ class EditOffer extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['media_type'] = 'image';
+        return $data;
+    }
+
 }

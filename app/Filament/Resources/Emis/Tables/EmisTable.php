@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Offers\Tables;
+namespace App\Filament\Resources\Emis\Tables;
 
 use Filament\Actions\EditAction;
-use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class OffersTable
+class EmisTable
 {
     public static function configure(Table $table): Table
     {
@@ -67,16 +66,8 @@ class OffersTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-
-            ->filters([
-                Tables\Filters\SelectFilter::make('offer_category_id')
-                    ->label('Category')
-                    ->relationship('category', 'title'),
-            ])
-
             ->defaultSort('title')
             ->striped()
-
             ->recordActions([
                 EditAction::make(),
             ]);

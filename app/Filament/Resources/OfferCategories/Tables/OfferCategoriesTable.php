@@ -4,6 +4,7 @@ namespace App\Filament\Resources\OfferCategories\Tables;
 
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -13,6 +14,11 @@ class OfferCategoriesTable
     {
         return $table
             ->columns([
+                ImageColumn::make('media_path')
+                    ->label('Image')
+                    ->square()
+                    ->imageHeight(40),
+
                 TextColumn::make('super_title')
                     ->label('Super Title')
                     ->searchable()

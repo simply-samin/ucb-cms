@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\OffersDealsSection;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,8 +20,9 @@ class DatabaseSeeder extends Seeder
             ExploreCardSectionSeeder::class,
             OfferSeeder::class,
             FeaturedOfferSectionSeeder::class,
-            OffersDealsSection::class,
+            OffersDealsSectionSeeder::class,
             LoungeSectionSeeder::class,
+            EmiSeeder::class,
         ]);
     }
 }

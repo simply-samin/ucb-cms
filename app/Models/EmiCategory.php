@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LoungeSection extends Model
+class EmiCategory extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -16,4 +19,10 @@ class LoungeSection extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function emis()
+    {
+        return $this->hasMany(Emi::class);
+    }
+
 }

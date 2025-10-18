@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('offer_categories', function (Blueprint $table) {
+        Schema::create('emi_categories', function (Blueprint $table) {
             $table->id();
 
             $table->string('media_type')->nullable(); 
@@ -24,8 +27,11 @@ return new class extends Migration
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('offer_categories');
+        Schema::dropIfExists('emi_categories');
     }
 };

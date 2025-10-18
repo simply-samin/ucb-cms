@@ -121,27 +121,25 @@ class HeroSectionForm
                                     ->inline(false),
                             ]),
 
-                        Grid::make(2)
-                            ->schema([
-                                FileUpload::make('upload_path')
-                                    ->label('Image')
-                                    ->helperText('Upload the hero background image (Max: 2MB).')
-                                    ->disk('public')
-                                    ->directory('hero')
-                                    ->visibility('public')
-                                    ->image()
-                                    ->imagePreviewHeight('100px')
-                                    ->maxSize(2048)
-                                    ->required(fn (Get $get) => $get('media_type') === 'image')
-                                    ->visible(fn (Get $get) => $get('media_type') === 'image'),
+                        FileUpload::make('upload_path')
+                            ->label('Image')
+                            ->helperText('Upload the hero background image (Max: 1MB).')
+                            ->disk('public')
+                            ->directory('hero')
+                            ->visibility('public')
+                            ->image()
+                            ->imagePreviewHeight('100px')
+                            ->maxSize(1024)
+                            ->required(fn (Get $get) => $get('media_type') === 'image')
+                            ->visible(fn (Get $get) => $get('media_type') === 'image')
+                            ->columnSpanFull(),
 
-                                TextInput::make('video_url')
-                                    ->label('Video URL')
-                                    ->placeholder('https://example.com/video.mp4')
-                                    ->required(fn (Get $get) => $get('media_type') === 'video')
-                                    ->visible(fn (Get $get) => $get('media_type') === 'video'),
-                            ]),
-
+                        TextInput::make('video_url')
+                            ->label('Video URL')
+                            ->placeholder('https://example.com/video.mp4')
+                            ->required(fn (Get $get) => $get('media_type') === 'video')
+                            ->visible(fn (Get $get) => $get('media_type') === 'video')
+                            ->columnSpanFull(),
 
                         TextInput::make('super_title')
                             ->label('Super Title')

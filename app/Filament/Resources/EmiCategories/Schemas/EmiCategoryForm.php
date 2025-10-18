@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\OfferCategories\Schemas;
+namespace App\Filament\Resources\EmiCategories\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
@@ -8,7 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
-class OfferCategoryForm
+class EmiCategoryForm
 {
     public static function configure(Schema $schema): Schema
     {
@@ -18,11 +18,10 @@ class OfferCategoryForm
 
                 FileUpload::make('media_path')
                     ->label('Image')
-                    ->helperText('Upload an image for the offer category (Max: 1MB).')
+                    ->helperText('Upload an image for the EMI category (Max: 1MB).')
                     ->disk('public')
-                    ->directory('offer-categories')
+                    ->directory('emi-categories')
                     ->visibility('public')
-                    ->image()
                     ->imagePreviewHeight('100px')
                     ->maxSize(1024)
                     ->required()
@@ -30,18 +29,21 @@ class OfferCategoryForm
 
                 TextInput::make('super_title')
                     ->label('Super Title')
-                    ->maxLength(255)
-                    ->columnSpanFull(),
+                    ->placeholder('e.g. Easy Payment Options')
+                    ->maxLength(255),
 
                 TextInput::make('title')
                     ->label('Title')
+                    ->placeholder('e.g. Flexible EMI Plans')
+                    ->required()
                     ->maxLength(255)
-                    ->required(),
+                    ->columnSpanFull(),
 
                 Textarea::make('subtitle')
                     ->label('Subtitle')
-                    ->rows(2)
+                    ->placeholder('e.g. Choose from flexible monthly payment options to fit your budget.')
                     ->maxLength(500)
+                    ->rows(2)
                     ->columnSpanFull(),
 
                 Toggle::make('is_active')

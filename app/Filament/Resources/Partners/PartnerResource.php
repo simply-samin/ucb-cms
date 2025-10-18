@@ -32,8 +32,6 @@ class PartnerResource extends Resource
 
     protected static string | UnitEnum | null $navigationGroup = 'Content';
 
-    protected static ?int $navigationSort = 3;
-
     public static function form(Schema $schema): Schema
     {
         return $schema

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Offers\Tables;
+namespace App\Filament\Resources\EmiCategories\Tables;
 
 use Filament\Actions\EditAction;
-use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class OffersTable
+class EmiCategoriesTable
 {
     public static function configure(Table $table): Table
     {
@@ -20,42 +19,37 @@ class OffersTable
                     ->square()
                     ->imageHeight(40),
 
-                TextColumn::make('category.title')
-                    ->label('Category')
-                    ->sortable()
-                    ->searchable(),
-
                 TextColumn::make('super_title')
                     ->label('Super Title')
-                    ->limit(40)
-                    ->sortable()
                     ->searchable()
+                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('title')
                     ->label('Title')
-                    ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
 
                 TextColumn::make('subtitle')
                     ->label('Subtitle')
                     ->limit(50)
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                TextColumn::make('address')
-                    ->label('Address')
-                    ->limit(50)
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('media_type')
+                //     ->label('Media Type')
+                //     ->badge()
+                //     ->colors([
+                //         'primary',
+                //         'success' => 'image',
+                //         'warning' => 'video',
+                //     ])
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
 
-                TextColumn::make('eligibility')
-                    ->label('Eligibility')
-                    ->limit(50)
-                    ->toggleable(isToggledHiddenByDefault: true),
-
-                TextColumn::make('validity')
-                    ->label('Validity')
-                    ->limit(40)
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('emis_count')
+                    ->label('EMIs')
+                    ->counts('emis')
+                    ->badge(),
 
                 IconColumn::make('is_active')
                     ->label('Active')
@@ -67,16 +61,8 @@ class OffersTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-
-            ->filters([
-                Tables\Filters\SelectFilter::make('offer_category_id')
-                    ->label('Category')
-                    ->relationship('category', 'title'),
-            ])
-
             ->defaultSort('title')
             ->striped()
-
             ->recordActions([
                 EditAction::make(),
             ]);

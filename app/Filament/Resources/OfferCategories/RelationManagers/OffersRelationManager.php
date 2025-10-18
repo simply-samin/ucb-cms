@@ -11,7 +11,7 @@ use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -30,20 +30,17 @@ class OffersRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextInput::make('brand_name')
-                    ->label('Brand Name')
-                    ->maxLength(255)
-                    ->required(),
 
-                FileUpload::make('brand_image')
-                    ->label('Brand Image')
+                FileUpload::make('media_path')
+                    ->label('Image')
+                    ->helperText('Upload an image for this Offer (Max: 1MB).')
                     ->disk('public')
-                    ->directory('offers/brands')
+                    ->directory('emis')
                     ->visibility('public')
                     ->image()
                     ->imagePreviewHeight('100px')
-                    ->maxSize(1024)
-                    ->helperText('Upload the brand image (max 1MB).')
+                    ->maxSize(2048)
+                    ->required()
                     ->columnSpanFull(),
 
                 TextInput::make('super_title')
@@ -61,35 +58,24 @@ class OffersRelationManager extends RelationManager
                     ->maxLength(255)
                     ->columnSpanFull(),
 
-                Grid::make(2)
-                    ->schema([
-                        TextInput::make('offer_amount')
-                            ->label('Offer Amount')
-                            ->maxLength(255),
-
-                        TextInput::make('minimum_order')
-                            ->label('Minimum Order')
-                            ->maxLength(255),
-                    ])
-                    ->columnSpanFull(),
-
-                TextInput::make('cash_back_limit')
-                    ->label('Cashback Limit')
-                    ->maxLength(255)
-                    ->columnSpanFull(),
-
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->label('Description')
-                    ->rows(3)
+                    ->placeholder('Provide detailed information about the offer.')
                     ->columnSpanFull(),
 
-                Textarea::make('eligibility')
+                RichEditor::make('address')
+                    ->label('Address')
+                    ->placeholder('Enter the location or branch address related to the offer.')
+                    ->columnSpanFull(),
+
+                RichEditor::make('eligibility')
                     ->label('Eligibility')
-                    ->rows(2)
+                    ->placeholder('Specify who is eligible for this offer.')
                     ->columnSpanFull(),
 
                 TextInput::make('validity')
                     ->label('Validity')
+                    ->placeholder('e.g. Valid until Dec 31, 2025')
                     ->maxLength(255)
                     ->columnSpanFull(),
 
@@ -106,50 +92,59 @@ class OffersRelationManager extends RelationManager
             ->inverseRelationship('category')
             ->recordTitleAttribute('title')
             ->columns([
-                ImageColumn::make('brand_image')
-                    ->label('Brand')
+                ImageColumn::make('media_path')
+                    ->label('Image')
                     ->square()
                     ->imageHeight(40),
 
-                TextColumn::make('brand_name')
-                    ->label('Brand Name')
-                    ->sortable(),
+                TextColumn::make('category.title')
+                    ->label('Category')
+                    ->sortable()
+                    ->searchable(),
 
                 TextColumn::make('super_title')
                     ->label('Super Title')
                     ->limit(40)
+                    ->sortable()
+                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('title')
                     ->label('Title')
-                    ->limit(40)
+                    ->sortable()
                     ->searchable(),
 
-                TextColumn::make('offer_amount')
-                    ->label('Offer Amount')
-                    ->sortable()
+                TextColumn::make('subtitle')
+                    ->label('Subtitle')
+                    ->limit(50)
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                TextColumn::make('minimum_order')
-                    ->label('Minimum Order')
-                    ->sortable()
+                TextColumn::make('address')
+                    ->label('Address')
+                    ->limit(50)
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                TextColumn::make('cash_back_limit')
-                    ->label('Cashback Limit')
-                    ->sortable()
+                TextColumn::make('eligibility')
+                    ->label('Eligibility')
+                    ->limit(50)
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('validity')
                     ->label('Validity')
-                    ->sortable()
+                    ->limit(40)
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean(),
+
+                TextColumn::make('updated_at')
+                    ->label('Last Updated')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->defaultSort('brand_name')
+            ->defaultSort('title')
             ->headerActions([
                 CreateAction::make(),
                 AssociateAction::make(),
@@ -157,12 +152,12 @@ class OffersRelationManager extends RelationManager
             ->recordActions([
                 EditAction::make(),
                 DissociateAction::make(),
-                DeleteAction::make(),
+                // DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DissociateBulkAction::make(),
-                    DeleteBulkAction::make(),
+                    // DeleteBulkAction::make(),
                 ]),
             ]);
     }
