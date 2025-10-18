@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OffersDealsSection extends Model
+class PartnerSection extends Model
 {
     /**
      * The attributes that aren't mass assignable.
@@ -19,6 +19,5 @@ class OffersDealsSection extends Model
 
     protected $casts = [
         'title_dynamic' => 'array',
-        'is_active' => 'boolean',
     ];
 }
